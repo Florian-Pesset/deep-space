@@ -49,7 +49,7 @@ const Navigation = () => {
           sx={{ width: { base: "none", sm: "25vw", md: "28vw", xl: "35vw" } }}
           position="absolute"
           left={{ base: "none", sm: "70px", md: "110px", xl: "110px" }}
-          zIndex={10}
+          zIndex={100}
         >
           <Divider />
         </Center>
@@ -72,12 +72,12 @@ const Navigation = () => {
         </Box>
       </Box>
       <Box
-        position="absolute"
+        position={showMenu ? "fixed" : "absolute"}
         top="0.5rem"
         right="0.5rem"
         display={{ base: "block", sm: "none" }}
         onClick={handleToggleMenu}
-        zIndex={10}
+        zIndex={100}
       >
         <IconButton
           aria-label="Menu"
@@ -97,7 +97,7 @@ const Navigation = () => {
         width={{ base: "256px", sm: "none" }}
         height={{ base: "100vh", sm: "none" }}
         flexDirection="column"
-        zIndex={1}
+        zIndex={10}
         bg="rgba(255, 255, 255, 0.04)"
         backdropFilter="blur(40.7742px)"
       >

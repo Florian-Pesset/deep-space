@@ -22,7 +22,7 @@ const HomeView: NextPage = () => {
         flexDirection={{ base: "column", xl: "row" }}
         gap={{ base: "20px", xl: "400px" }}
       >
-        <Box width="470px">
+        <Box width={{ base: "fit-content", md: "470px" }}>
           <Text color="primary">SO, YOU WANT TO TRAVEL TO</Text>
           <Heading as="h1" sx={headingStyles}>
             SPACE

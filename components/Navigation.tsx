@@ -46,9 +46,9 @@ const Navigation = () => {
         <Image src={logo.src} alt="Space Logo" boxSize="32px" ml={2} />
         <Center
           width="35vw"
-          sx={{ width: { base: "none", sm: "25vw", md: "25vw", xl: "35vw" } }}
+          sx={{ width: { base: "none", sm: "25vw", md: "28vw", xl: "35vw" } }}
           position="absolute"
-          left="110px"
+          left={{ base: "none", sm: "70px", md: "110px", xl: "110px" }}
           zIndex={10}
         >
           <Divider />

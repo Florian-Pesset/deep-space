@@ -53,7 +53,7 @@ const Destination: NextPage = () => {
             >
               01
             </Text>
-            <Text fontSize="xl" color="primary">
+            <Text fontSize="xl" color="primary" textTransform="uppercase">
               Pick your destination
             </Text>
           </Box>

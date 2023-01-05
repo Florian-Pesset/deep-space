@@ -1,4 +1,11 @@
-import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Divider,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { NextPage } from "next";
 
 import Head from "next/head";
@@ -80,7 +87,9 @@ const Crew: NextPage = () => {
                       alignItems="center"
                     >
                       <Box>
-                        <Image src={src} alt={crew.name} height="400px" />
+                        <AspectRatio ratio={0.7} w="250px">
+                          <Image src={src} alt={crew.name} />
+                        </AspectRatio>
                         <Divider
                           visibility={{ base: "visible", md: "hidden" }}
                         />

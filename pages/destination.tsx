@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import CelestialBodyInfo from "../components/CelestialBodyInfo";
 import data from "../data.json";

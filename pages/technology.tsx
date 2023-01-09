@@ -1,7 +1,5 @@
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
-import Head from "next/head";
-import Navigation from "../components/Navigation";
 import headingStyles from "../styles/headingStyles";
 import data from "../data.json";
 import { useState } from "react";
@@ -23,9 +21,8 @@ const technology: NextPage = () => {
         name="technology"
         component={
           <>
-            <Box
+            <Flex
               flexDirection="row"
-              display="flex"
               gap={1}
               justifyContent={{ base: "center", sm: "start" }}
               width="80vw"
@@ -41,15 +38,13 @@ const technology: NextPage = () => {
               <Text fontSize="xl" color="primary" textTransform="uppercase">
                 SPACE LAUNCH 101
               </Text>
-            </Box>
-            <Box
-              display="flex"
+            </Flex>
+            <Flex
               flexDirection={{ base: "column", lg: "row-reverse" }}
               justifyContent="center"
               alignItems="center"
             >
-              <Box
-                display="flex"
+              <Flex
                 justifyContent="center"
                 alignItems="center"
                 position={{ lg: "absolute" }}
@@ -60,22 +55,20 @@ const technology: NextPage = () => {
                   alt={selectedBody.name}
                   width={{ base: "100vw", lg: "400px" }}
                 />
-              </Box>
-              <Box
-                display="flex"
+              </Flex>
+              <Flex
                 justifyContent="center"
                 alignItems="center"
                 flexDirection={{ base: "column", lg: "row" }}
                 width={{ base: "fit-content", lg: "50vw" }}
                 mr={{ lg: "20em" }}
               >
-                <Box
-                  display="flex"
+                <Flex
                   flexDirection={{ base: "row", lg: "column" }}
                   justifyContent="center"
                 >
                   {data.technology.map((technology, id) => (
-                    <Box
+                    <Flex
                       as="button"
                       borderRadius="50%"
                       width="50px"
@@ -90,7 +83,6 @@ const technology: NextPage = () => {
                           ? "none"
                           : "solid gray"
                       }
-                      display="flex"
                       alignItems="center"
                       justifyContent="center"
                       m={5}
@@ -109,11 +101,10 @@ const technology: NextPage = () => {
                       >
                         {id + 1}
                       </Text>
-                    </Box>
+                    </Flex>
                   ))}
-                </Box>
-                <Box
-                  display="flex"
+                </Flex>
+                <Flex
                   flexDirection="column"
                   justifyContent="center"
                   alignItems={{ base: "center", lg: "start" }}
@@ -129,9 +120,9 @@ const technology: NextPage = () => {
                   <Text m={5} color="secondary">
                     {selectedBody.description}
                   </Text>
-                </Box>
-              </Box>
-            </Box>
+                </Flex>
+              </Flex>
+            </Flex>
           </>
         }
       />

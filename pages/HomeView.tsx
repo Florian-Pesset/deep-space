@@ -1,8 +1,6 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-
-import Head from "next/head";
 import headingStyles from "../styles/headingStyles";
 
 const HomeView: NextPage = () => {
@@ -10,8 +8,7 @@ const HomeView: NextPage = () => {
 
   return (
     <>
-      <Box
-        display="flex"
+      <Flex
         mt={{ base: "none", xl: "1em", "2xl": "15em" }}
         flexDirection={{ base: "column", xl: "row" }}
         gap={{ base: "20px", xl: "400px" }}
@@ -29,13 +26,12 @@ const HomeView: NextPage = () => {
           </Text>
         </Box>
 
-        <Box
+        <Flex
           as="button"
           borderRadius="50%"
           width="200px"
           height="200px"
           backgroundColor="white"
-          display="flex"
           alignItems="center"
           justifyContent="center"
           _hover={{
@@ -48,8 +44,8 @@ const HomeView: NextPage = () => {
           onClick={() => router.push("/destination")}
         >
           <Text fontSize="lg">Explore</Text>
-        </Box>
-      </Box>
+        </Flex>
+      </Flex>
     </>
   );
 };

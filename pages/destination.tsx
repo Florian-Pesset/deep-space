@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import CelestialBodyInfo from "../components/CelestialBodyInfo";
 import data from "../data.json";
@@ -17,9 +17,8 @@ const Destination: NextPage = () => {
         name="destination"
         component={
           <>
-            <Box
+            <Flex
               flexDirection="row"
-              display="flex"
               gap={1}
               justifyContent={{ base: "center", sm: "start" }}
               width="80vw"
@@ -35,13 +34,9 @@ const Destination: NextPage = () => {
               <Text fontSize="xl" color="primary" textTransform="uppercase">
                 Pick your destination
               </Text>
-            </Box>
-            <Box
-              display="flex"
-              flexDirection={{ base: "column", xl: "row" }}
-              gap={8}
-            >
-              <Box display="flex" justifyContent="center" alignItems="center">
+            </Flex>
+            <Flex flexDirection={{ base: "column", xl: "row" }} gap={8}>
+              <Flex justifyContent="center" alignItems="center">
                 <Image
                   src={src}
                   alt={selectedBody.name}
@@ -49,15 +44,10 @@ const Destination: NextPage = () => {
                   height="300px"
                   ml={2}
                 />
-              </Box>
+              </Flex>
 
-              <Box
-                display="flex"
-                flexDirection="column"
-                width={{ base: "90vw", xl: "40vw" }}
-              >
-                <Box
-                  display="flex"
+              <Flex flexDirection="column" width={{ base: "90vw", xl: "40vw" }}>
+                <Flex
                   flexDirection="row"
                   justifyContent={{ base: "center", xl: "start" }}
                   ml={8}
@@ -89,10 +79,10 @@ const Destination: NextPage = () => {
                       </a>
                     </Text>
                   ))}
-                </Box>
+                </Flex>
                 <CelestialBodyInfo body={selectedBody} />
-              </Box>
-            </Box>
+              </Flex>
+            </Flex>
           </>
         }
       />

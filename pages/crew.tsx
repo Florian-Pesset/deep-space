@@ -2,17 +2,14 @@ import {
   AspectRatio,
   Box,
   Divider,
+  Flex,
   Heading,
   Image,
   Text,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
-
-import Head from "next/head";
-import Navigation from "../components/Navigation";
 import data from "../data.json";
 import headingStyles from "../styles/headingStyles";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Pagination } from "swiper";
 import "swiper/swiper-bundle.min.css";
@@ -26,16 +23,14 @@ const Crew: NextPage = () => {
         name="crew"
         component={
           <>
-            <Box
+            <Flex
               flexDirection="column"
-              display="flex"
               gap={9}
               alignItems="center"
               minH="100vh"
             >
-              <Box
+              <Flex
                 flexDirection="row"
-                display="flex"
                 gap={1}
                 justifyContent={{ base: "center", sm: "start" }}
                 width="80vw"
@@ -51,7 +46,7 @@ const Crew: NextPage = () => {
                 <Text fontSize="xl" color="primary" textTransform="uppercase">
                   Meet your crew
                 </Text>
-              </Box>
+              </Flex>
               <Box width="80vw">
                 <Swiper
                   slidesPerView={1}
@@ -64,9 +59,8 @@ const Crew: NextPage = () => {
 
                     return (
                       <SwiperSlide key={crew.name}>
-                        <Box
+                        <Flex
                           textAlign={{ base: "center", lg: "start" }}
-                          display="flex"
                           flexDirection={{
                             base: "column",
                             md: "column-reverse",
@@ -100,13 +94,13 @@ const Crew: NextPage = () => {
                             </Heading>
                             <Text color="primary">{crew.bio}</Text>
                           </Box>
-                        </Box>
+                        </Flex>
                       </SwiperSlide>
                     );
                   })}
                 </Swiper>
               </Box>
-            </Box>
+            </Flex>
           </>
         }
       />

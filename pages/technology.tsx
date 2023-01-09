@@ -6,15 +6,12 @@ import headingStyles from "../styles/headingStyles";
 import data from "../data.json";
 import { useState } from "react";
 import { useMediaQuery } from "@chakra-ui/react";
+import Layout from "../components/Layout";
 
 const technology: NextPage = () => {
   const [isLargerThan62em] = useMediaQuery("(min-width: 62em)");
   const [selectedBody, setSelectedBody] = useState(data.technology[0]);
   const [hoveredTechnology, setHoveredTechnology] = useState("");
-
-  const devices = (device: string) => {
-    return `url('../assets/technology/background-technology-${device}.jpg')`;
-  };
 
   const src = isLargerThan62em
     ? `.${selectedBody.images.portrait}`
@@ -22,136 +19,122 @@ const technology: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Technology</title>
-      </Head>
-      <Box
-        bgImage={{
-          base: devices("mobile"),
-          md: devices("tablet"),
-          xl: devices("desktop"),
-        }}
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
-        backgroundSize="cover"
-      >
-        <Navigation />
-        <Box
-          flexDirection="column"
-          display="flex"
-          gap={9}
-          alignItems="center"
-          minH="90vh"
-        >
-          <Box
-            flexDirection="row"
-            display="flex"
-            gap={1}
-            justifyContent={{ base: "center", sm: "start" }}
-            width="80vw"
-          >
-            <Text
-              fontSize="xl"
-              color="primary"
-              opacity={0.25}
-              fontWeight="bold"
-            >
-              02
-            </Text>
-            <Text fontSize="xl" color="primary" textTransform="uppercase">
-              SPACE LAUNCH 101
-            </Text>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection={{ base: "column", lg: "row-reverse" }}
-            justifyContent="center"
-            alignItems="center"
-          >
+      <Layout
+        name="technology"
+        component={
+          <>
             <Box
+              flexDirection="row"
               display="flex"
-              justifyContent="center"
-              alignItems="center"
-              position={{ lg: "absolute" }}
-              right={{ lg: 0 }}
+              gap={1}
+              justifyContent={{ base: "center", sm: "start" }}
+              width="80vw"
             >
-              <Image
-                src={src}
-                alt={selectedBody.name}
-                width={{ base: "100vw", lg: "400px" }}
-              />
+              <Text
+                fontSize="xl"
+                color="primary"
+                opacity={0.25}
+                fontWeight="bold"
+              >
+                02
+              </Text>
+              <Text fontSize="xl" color="primary" textTransform="uppercase">
+                SPACE LAUNCH 101
+              </Text>
             </Box>
             <Box
               display="flex"
+              flexDirection={{ base: "column", lg: "row-reverse" }}
               justifyContent="center"
               alignItems="center"
-              flexDirection={{ base: "column", lg: "row" }}
-              width={{ base: "fit-content", lg: "50vw" }}
-              mr={{ lg: "20em" }}
             >
               <Box
                 display="flex"
-                flexDirection={{ base: "row", lg: "column" }}
                 justifyContent="center"
+                alignItems="center"
+                position={{ lg: "absolute" }}
+                right={{ lg: 0 }}
               >
-                {data.technology.map((technology, id) => (
-                  <Box
-                    as="button"
-                    borderRadius="50%"
-                    width="50px"
-                    height="50px"
-                    backgroundColor={
-                      selectedBody.name === technology.name ? "white" : "none"
-                    }
-                    border={
-                      hoveredTechnology === technology.name
-                        ? "solid white"
-                        : selectedBody.name === technology.name
-                        ? "none"
-                        : "solid gray"
-                    }
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    m={5}
-                    onClick={() => setSelectedBody(technology)}
-                  >
-                    <Text
-                      color={
-                        selectedBody.name === technology.name
-                          ? "black"
-                          : "white"
+                <Image
+                  src={src}
+                  alt={selectedBody.name}
+                  width={{ base: "100vw", lg: "400px" }}
+                />
+              </Box>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                flexDirection={{ base: "column", lg: "row" }}
+                width={{ base: "fit-content", lg: "50vw" }}
+                mr={{ lg: "20em" }}
+              >
+                <Box
+                  display="flex"
+                  flexDirection={{ base: "row", lg: "column" }}
+                  justifyContent="center"
+                >
+                  {data.technology.map((technology, id) => (
+                    <Box
+                      as="button"
+                      borderRadius="50%"
+                      width="50px"
+                      height="50px"
+                      backgroundColor={
+                        selectedBody.name === technology.name ? "white" : "none"
                       }
-                      onMouseEnter={() => setHoveredTechnology(technology.name)}
-                      onMouseLeave={() => setHoveredTechnology("")}
+                      border={
+                        hoveredTechnology === technology.name
+                          ? "solid white"
+                          : selectedBody.name === technology.name
+                          ? "none"
+                          : "solid gray"
+                      }
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      m={5}
+                      onClick={() => setSelectedBody(technology)}
                     >
-                      {id + 1}
-                    </Text>
-                  </Box>
-                ))}
-              </Box>
-              <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems={{ base: "center", lg: "start" }}
-                textAlign={{ base: "center", lg: "start" }}
-                width="80vw"
-              >
-                <Text m={5} color="secondary" textTransform="uppercase">
-                  THE TERMINOLOGY…
-                </Text>
-                <Heading m={5} as="h1" sx={headingStyles} mt={5}>
-                  {selectedBody.name}
-                </Heading>
-                <Text m={5} color="secondary">
-                  {selectedBody.description}
-                </Text>
+                      <Text
+                        color={
+                          selectedBody.name === technology.name
+                            ? "black"
+                            : "white"
+                        }
+                        onMouseEnter={() =>
+                          setHoveredTechnology(technology.name)
+                        }
+                        onMouseLeave={() => setHoveredTechnology("")}
+                      >
+                        {id + 1}
+                      </Text>
+                    </Box>
+                  ))}
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  alignItems={{ base: "center", lg: "start" }}
+                  textAlign={{ base: "center", lg: "start" }}
+                  width="80vw"
+                >
+                  <Text m={5} color="secondary" textTransform="uppercase">
+                    THE TERMINOLOGY…
+                  </Text>
+                  <Heading m={5} as="h1" sx={headingStyles} mt={5}>
+                    {selectedBody.name}
+                  </Heading>
+                  <Text m={5} color="secondary">
+                    {selectedBody.description}
+                  </Text>
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Box>
-      </Box>
+          </>
+        }
+      />
     </>
   );
 };

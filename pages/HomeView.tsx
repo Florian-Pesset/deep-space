@@ -91,13 +91,13 @@ const HomeView = ({ pictureOfDay }: HomeViewProps) => {
               <Image
                 src={pictureOfDay?.hdurl}
                 borderRadius="lg"
-                alt={pictureOfDay.title}
+                alt={pictureOfDay?.title}
                 onClick={() => setIsOpen(true)}
               />
               <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <ModalOverlay />
                 <ModalContent bgColor="gray.300">
-                  <ModalHeader>{pictureOfDay.title}</ModalHeader>
+                  <ModalHeader>{pictureOfDay?.title}</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
                     <Image src={pictureOfDay?.hdurl} width="80vw" />

@@ -28,6 +28,7 @@ type HomeViewProps = {
 const HomeView = ({ pictureOfDay }: HomeViewProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { hdurl, title, copyright, date, explanation } = pictureOfDay!;
 
   return (
     <>
@@ -89,32 +90,32 @@ const HomeView = ({ pictureOfDay }: HomeViewProps) => {
               justifyContent={{ base: "center", md: "start" }}
             >
               <Image
-                src={pictureOfDay?.hdurl}
+                src={hdurl}
                 borderRadius="lg"
-                alt={pictureOfDay?.title}
+                alt={title}
                 onClick={() => setIsOpen(true)}
               />
               <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
                 <ModalOverlay />
                 <ModalContent bgColor="gray.300">
-                  <ModalHeader>{pictureOfDay?.title}</ModalHeader>
+                  <ModalHeader>{title}</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
-                    <Image src={pictureOfDay?.hdurl} width="80vw" />
+                    <Image src={hdurl} width="80vw" />
                   </ModalBody>
                 </ModalContent>
               </Modal>
               <Text>
-                {pictureOfDay.copyright} - {pictureOfDay.date}
+                {copyright} - {date}
               </Text>
             </Flex>
 
             <Box width={{ md: "300px", lg: "40vw" }}>
               <Text as="h3" fontSize="2xl">
-                {pictureOfDay.title}
+                {title}
               </Text>
 
-              <Text>{pictureOfDay.explanation}</Text>
+              <Text>{explanation}</Text>
             </Box>
           </Flex>
         </CardBody>

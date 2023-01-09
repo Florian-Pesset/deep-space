@@ -1,3 +1,10 @@
 {
-  "extends": ["next/babel", "next/core-web-vitals"]
+  "extends": ["next/babel", "next/core-web-vitals"],
+  "rules": {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
+  },
+  "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }]
 }

@@ -44,7 +44,12 @@ const HomeView: NextPage = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          _hover={{ transform: "scale(1.1)", transition: "all 300ms" }}
+          _hover={{
+            transform: "scale(1.1)",
+            transition: " 1s ease",
+            transitionProperty: "revert",
+            border: "25px solid grey !important",
+          }}
           alignSelf={{ base: "center", xl: "end" }}
           onClick={() => router.push("/destination")}
         >

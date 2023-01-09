@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Navigation from "./Navigation";
 
@@ -15,11 +15,7 @@ const Layout = ({ name, component }: LayoutPageProps) => {
   return (
     <>
       <Head>
-        <title>
-          {name}
-          <meta name="description" content={`${name} page`} />
-          <link rel="icon" href="/favicon.ico" />
-        </title>
+        <title style={{ textTransform: "capitalize" }}>{name}</title>
       </Head>
       <Box
         bgImage={{
@@ -32,15 +28,9 @@ const Layout = ({ name, component }: LayoutPageProps) => {
         backgroundSize="cover"
       >
         <Navigation />
-        <Box
-          flexDirection="column"
-          display="flex"
-          gap={9}
-          alignItems="center"
-          minH="90vh"
-        >
+        <Flex flexDirection="column" gap={9} alignItems="center" minH="90vh">
           {component}
-        </Box>
+        </Flex>
       </Box>
     </>
   );

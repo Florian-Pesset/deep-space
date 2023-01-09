@@ -6,6 +6,9 @@ import Layout from "../components/Layout";
 const Home: NextPage = () => {
   return (
     <>
+      <title>
+        <link rel="icon" href="/favicon.ico" />
+      </title>
       <Layout
         name="home"
         component={

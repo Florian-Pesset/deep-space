@@ -5,6 +5,7 @@ import data from "../data.json";
 import { useState } from "react";
 import { useMediaQuery } from "@chakra-ui/react";
 import Layout from "../components/Layout";
+import ISSposition from "../components/ISSposition";
 
 const technology: NextPage = () => {
   const [isLargerThan62em] = useMediaQuery("(min-width: 62em)");
@@ -123,6 +124,7 @@ const technology: NextPage = () => {
                 </Flex>
               </Flex>
             </Flex>
+            <ISSposition />
           </>
         }
       />

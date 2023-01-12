@@ -13,21 +13,22 @@ const ISS = () => {
   );
   useEffect(() => {
     const interval = setInterval(async () => {
-      const response = await axios.get(
-        "http://api.open-notify.org/iss-now.json"
-      );
+      await axios
+        .get("http://api.open-notify.org/iss-now.json")
+        .then((res) => {
+          const {
+            data: {
+              iss_position: { latitude, longitude },
+            },
+          } = res;
 
-      const {
-        data: {
-          iss_position: { latitude, longitude },
-        },
-      } = response;
-
-      setPosition({
-        x: 5 * Math.cos(latitude) * Math.cos(longitude),
-        y: 5 * Math.cos(latitude) * Math.sin(longitude),
-        z: 5 * Math.sin(latitude),
-      });
+          setPosition({
+            x: 5 * Math.cos(latitude) * Math.cos(longitude),
+            y: 5 * Math.cos(latitude) * Math.sin(longitude),
+            z: 5 * Math.sin(latitude),
+          });
+        })
+        .catch((err) => console.error(err));
     }, 1000);
 
     return () => clearInterval(interval);

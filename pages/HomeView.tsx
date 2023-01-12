@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -17,18 +18,46 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { PictureOfDayProps } from ".";
+
 import headingStyles from "../styles/headingStyles";
 
-type HomeViewProps = {
-  pictureOfDay: PictureOfDayProps;
-};
+interface PictureOfDayProps {
+  copyright: string;
+  date: string;
+  explanation: string;
+  hdurl: string;
+  media_type: string;
+  service_version: string;
+  title: string;
+  url: string;
+}
 
-const HomeView = ({ pictureOfDay }: HomeViewProps) => {
+const HomeView = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const [pictureOfDay, setPictureOfDay] = useState<PictureOfDayProps>({
+    copyright: "",
+    date: "",
+    explanation: "",
+    hdurl: "",
+    media_type: "",
+    service_version: "",
+    title: "",
+    url: "",
+  });
   const { hdurl, title, copyright, date, explanation } = pictureOfDay!;
+  const router = useRouter();
+
+  const getPictureOfDay = async () => {
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY_APOD;
+    const result = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
+    );
+    setPictureOfDay(await result.json());
+  };
+
+  useEffect(() => {
+    getPictureOfDay();
+  }, []);
 
   return (
     <>
@@ -114,7 +143,6 @@ const HomeView = ({ pictureOfDay }: HomeViewProps) => {
               <Text as="h3" fontSize="2xl">
                 {title}
               </Text>
-
               <Text>{explanation}</Text>
             </Box>
           </Flex>

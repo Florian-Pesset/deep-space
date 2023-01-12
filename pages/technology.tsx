@@ -124,7 +124,25 @@ const technology: NextPage = () => {
                 </Flex>
               </Flex>
             </Flex>
-            <ISSposition />
+            <Flex
+              flexDirection="column"
+              gap={1}
+              justifyContent="center"
+              alignItems="center"
+              width="80vw"
+              mt="5em"
+            >
+              <Text
+                fontSize="xl"
+                color="primary"
+                fontWeight="bold"
+                textAlign="center"
+                mb="3em"
+              >
+                Find actual ISS position
+              </Text>
+              <ISSposition />
+            </Flex>
           </>
         }
       />

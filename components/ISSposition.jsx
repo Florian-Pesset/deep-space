@@ -1,9 +1,8 @@
-import { useEffect, useRef, Suspense, useState } from "react";
-import { RepeatWrapping } from "three";
+import { useEffect, useRef, useState } from "react";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import axios from "axios";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { Plane, Box, OrbitControls, useTexture } from "@react-three/drei";
+import { Canvas, useLoader, useThree, useFrame } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 const ISS = () => {
@@ -25,22 +24,22 @@ const ISS = () => {
       } = response;
 
       setPosition({
-        x: (longitude / 180) * 100,
-        y: (latitude / 90) * 100,
-        z: 5,
+        x: 5 * Math.cos(latitude) * Math.cos(longitude),
+        y: 5 * Math.cos(latitude) * Math.sin(longitude),
+        z: 5 * Math.sin(latitude),
       });
     }, 1000);
-    console;
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <mesh
-      scale={new THREE.Vector3(1, 1, 1)}
+      scale={new THREE.Vector3(0.2, 1, 1)}
       position={new THREE.Vector3(position.x, position.y, position.z)}
     >
       <boxGeometry />
-      <meshStandardMaterial map={texture} />
+      <meshStandardMaterial map={texture} transparent={true} opacity={0.9} />
     </mesh>
   );
 };
@@ -53,24 +52,30 @@ const Earth = () => {
 
   return (
     <>
-      <mesh scale={new THREE.Vector3(40, 40, 40)}>
+      <mesh scale={new THREE.Vector3(4, 4, 4)}>
         <ambientLight intensity={0.7} />
         <sphereGeometry />
         <meshStandardMaterial map={texture} />
-        <OrbitControls />
+        <OrbitControls autoRotate />
       </mesh>
     </>
   );
 };
 
+const Camera = (props) => {
+  const ref = useRef();
+  const set = useThree((state) => state.set);
+  useEffect(() => void set({ camera: ref.current }), []);
+  useFrame(() => ref.current.updateMatrixWorld());
+  return <perspectiveCamera ref={ref} {...props} />;
+};
+
 const ISSposition = () => {
   return (
     <Canvas style={{ height: "800px" }}>
-      {/* <Suspense fallback={null}> */}
+      <Camera position={[0, 0, 20]} />
       <Earth />
       <ISS />
-
-      {/* </Suspense> */}
     </Canvas>
   );
 };

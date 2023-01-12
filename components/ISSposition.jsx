@@ -7,6 +7,7 @@ import * as THREE from "three";
 
 const ISS = () => {
   const [position, setPosition] = useState({ x: 0, y: 0, z: 5 });
+
   const texture = useLoader(
     TextureLoader,
     "https://upload.wikimedia.org/wikipedia/commons/8/88/ISS_after_STS-118_%28computer_rendering_of_August_2006%29.png"
@@ -14,7 +15,11 @@ const ISS = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       await axios
-        .get("http://api.open-notify.org/iss-now.json")
+        .get("http://api.open-notify.org/iss-now.json", {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
         .then((res) => {
           const {
             data: {

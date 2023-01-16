@@ -15,11 +15,7 @@ const ISS = () => {
   useEffect(() => {
     const interval = setInterval(async () => {
       await axios
-        .get("http://api.open-notify.org/iss-now.json", {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
+        .get("https://api.open-notify.org/iss-now.json")
         .then((res) => {
           const {
             data: {

@@ -14,8 +14,13 @@ const ISS = () => {
   );
   useEffect(() => {
     const interval = setInterval(async () => {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const url = "http://api.open-notify.org/iss-now.json";
+
       await axios
-        .get("https://api.open-notify.org/iss-now.json")
+        .get(url, { headers })
         .then((res) => {
           const {
             data: {

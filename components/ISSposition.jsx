@@ -17,21 +17,19 @@ const ISS = () => {
       const headers = {
         "Content-Type": "application/json",
       };
-      const url = "http://api.open-notify.org/iss-now.json";
+      const url = "https://api.wheretheiss.at/v1/satellites/25544";
 
       await axios
         .get(url, { headers })
         .then((res) => {
           const {
-            data: {
-              iss_position: { latitude, longitude },
-            },
+            data: { latitude, longitude, altitude },
           } = res;
 
           setPosition({
             x: 5 * Math.cos(latitude) * Math.cos(longitude),
             y: 5 * Math.cos(latitude) * Math.sin(longitude),
-            z: 5 * Math.sin(latitude),
+            z: 5 * Math.sin(altitude),
           });
         })
         .catch((err) => console.error(err));

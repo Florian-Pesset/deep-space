@@ -4,8 +4,9 @@ import axios from "axios";
 import { Canvas, useLoader, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
+import { Text } from "@chakra-ui/react";
 
-const ISS = () => {
+const ISS = ({ setRealPosition }) => {
   const [position, setPosition] = useState({ x: 0, y: 0, z: 5 });
 
   const texture = useLoader(
@@ -25,16 +26,24 @@ const ISS = () => {
           const {
             data: { latitude, longitude, altitude },
           } = res;
-
-          setPosition({
-            x: 5 * Math.cos(latitude) * Math.cos(longitude),
-            y: 5 * Math.cos(latitude) * Math.sin(longitude),
-            z: 5 * Math.sin(altitude),
+          setRealPosition({
+            latitude,
+            longitude,
+            altitude,
           });
+
+          const radius = 40;
+          const latRad = latitude * (Math.PI / 180);
+          const lonRad = longitude * (Math.PI / 180);
+
+          const x = radius * Math.cos(latRad) * Math.cos(lonRad);
+          const y = radius * Math.cos(latRad) * Math.sin(lonRad);
+          const z = radius * Math.sin(latRad);
+
+          setPosition({ x, y, z });
         })
         .catch((err) => console.error(err));
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -54,14 +63,13 @@ const Earth = () => {
     TextureLoader,
     "https://upload.wikimedia.org/wikipedia/commons/7/74/Mercator-projection.jpg"
   );
-
   return (
     <>
-      <mesh scale={new THREE.Vector3(4, 4, 4)}>
+      <mesh scale={new THREE.Vector3(31.8, 31.8, 31.8)}>
         <ambientLight intensity={0.7} />
         <sphereGeometry />
         <meshStandardMaterial map={texture} />
-        <OrbitControls autoRotate />
+        <OrbitControls />
       </mesh>
     </>
   );
@@ -69,6 +77,7 @@ const Earth = () => {
 
 const Camera = (props) => {
   const ref = useRef();
+
   const set = useThree((state) => state.set);
   useEffect(() => void set({ camera: ref.current }), []);
   useFrame(() => ref.current.updateMatrixWorld());
@@ -76,12 +85,18 @@ const Camera = (props) => {
 };
 
 const ISSposition = () => {
+  const [realPosition, setRealPosition] = useState({});
+
   return (
-    <Canvas style={{ height: "800px" }}>
-      <Camera position={[0, 0, 20]} />
-      <Earth />
-      <ISS />
-    </Canvas>
+    <>
+      <Text color="secondary">{realPosition.longitude}</Text>
+      <Text color="secondary">{realPosition.latitude}</Text>
+      <Canvas style={{ height: "800px" }}>
+        <Camera position={[0, 0, 90]} />
+        <Earth />
+        <ISS setRealPosition={setRealPosition} />
+      </Canvas>
+    </>
   );
 };
 
